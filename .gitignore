@@ -13,10 +13,14 @@
 /db/*.sqlite3-*
 
 # Ignore all logfiles and tempfiles.
+# https://www.alanvardy.com/posts/38
 /log/*
 /tmp/*
+/tmp/pids/*              # this line
 !/log/.keep
 !/tmp/.keep
+!/tmp/pids               # this line
+!/tmp/pids/.keep         # and this line
 
 # Ignore uploaded files in development.
 /storage/*
