@@ -1,0 +1,5 @@
+# CHECKS
+
+WAIT=10  
+ATTEMPTS=6  
+/check.txt it_works
