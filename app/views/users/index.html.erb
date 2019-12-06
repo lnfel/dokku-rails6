@@ -12,7 +12,7 @@
   </thead>
 
   <tbody>
-    <% @users.each do |user| %>
+    <% @users.where.not(:name => nil).where.not(:email => nil).each do |user| %>
       <tr>
         <td><%= user.try(:name) %></td>
         <td><%= user.try(:email) %></td>
