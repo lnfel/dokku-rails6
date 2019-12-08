@@ -23,7 +23,8 @@ test:
 production:
   adapter: postgresql
   secret_key_base: <%= Rails.application.credentials.dig(:secret_key_base) %>
-  url: <%= Rails.application.credentials.dig(:database_url) %>
   rails_master_key: <%= ENV['RAILS_MASTER_KEY'] %>
   encoding: unicode
   pool: 5
+
+# url: <%= Rails.application.credentials.dig(:database_url) %>
