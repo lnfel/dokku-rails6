@@ -185,3 +185,11 @@ Navigate to your yourrailsapp project directory and add the repository
 ```git
 git remote add dokku dokku@your.droplet.ip.address:yourappname
 ```
+
+8. **You can now push your code with**
+
+```git
+git add .
+git commit -m 'rails new'
+git push dokku master
+```
