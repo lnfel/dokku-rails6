@@ -1,4 +1,7 @@
 ![Dokku Logo](assets/dokku.png)
+
+[![Build Status](https://img.shields.io/circleci/project/github/dokku/dokku.svg?style=flat-square "Build Status")](https://circleci.com/gh/lnfel/workflows/dokku-rails6)
+
 # Dokku Rails 6
 
 Deploying Rails 6.0.1 app on Digitalocean VPS using [Dokku 0.19.10](http://dokku.viewdocs.io/dokku/). Following Alan Vardy's [blog post](https://alanvardy.com/posts/6) and [video](https://www.youtube.com/watch?v=xJsJ4paVVA8&lc=) presentation on Youtube. Dokku also uses [dokku-postgres](https://github.com/dokku/dokku-postgres) to handle the database.
