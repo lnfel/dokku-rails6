@@ -13,39 +13,39 @@ _app versions are indicated at the time of this writing (Dec. 9, 2019)_
 ##### 1. **Obtain a domain name**
 For testing I used **Freenom** which is you guessed, free domain hosting. Alan uses Namecheap and is proud about it.
 
-2. **Signup for Digitalocean**
+##### 2. **Signup for Digitalocean**
 One of the best and cheapest VPS hosting you can find out there.
 
-3. **Create a Droplet on Digitalocean**
+##### 3. **Create a Droplet on Digitalocean**
 You can create a droplet (virtual private server) with Dokku pre-installed! When creating a droplet, select the Marketplace and look for Dokku, [add your SSH keys](https://timleland.com/copy-ssh-key-to-clipboard/) and for testing you can select the lowest and cheapest plan.
 
-4. **Go to your server's IP and follow the web installer**
+##### 4. **Go to your server's IP and follow the web installer**
 Navigate to your droplet's IP address which will be listed in digitalocean. You will need to paste in your public ssh key, then make sure to check "Virtual host naming" for your apps. It means that if you create an app called _myapp_, it will be accessible at _myapp.mydomain.com_
 
-5. **Put your domain on Hostname field**
+##### 5. **Put your domain on Hostname field**
 This will be important as dokku will generate url based on what you put on Hostname field such as _myapp.**mydomain.com**_ where **mydomain.com** is the hostname. It is possible to change hostnames after installation but I would just recommend to rebuild the app completely if you are changing hostnames.
 
 ## Creating a Dokku app
 
-5. **SSH onto your server**
+##### 5. **SSH onto your server**
 
 ```console
 ssh root@your.droplet.ip.address
 ```
 
-6. **Update everything** (Digital Ocean's droplets will not be completely up to date, and Dokku can easily be a few versions behind)
+##### 6. **Update everything** (Digital Ocean's droplets will not be completely up to date, and Dokku can easily be a few versions behind)
 
 ```console
 apt update && apt upgrade
 ```
 
-7. **Create the app**
+##### 7. **Create the app**
 
 ```console
 dokku apps:create yourappname
 ```
 
-8. **Install Postgres, create and link database**
+##### 8. **Install Postgres, create and link database**
 
 ```console
 dokku plugin:install https://github.com/dokku/dokku-postgres.git
@@ -53,7 +53,7 @@ dokku postgres:create yourdbname
 dokku postgres:link yourdbname yourappname
 ```
 
-9. **Create a swap file** to help out on the ram front. You will only see output after the 3rd line.
+##### 9. **Create a swap file** to help out on the ram front. You will only see output after the 3rd line.
 
 ```console
 fallocate -l 2G /swapfile
@@ -62,13 +62,13 @@ mkswap /swapfile
 swapon /swapfile
 ```
 
-10. **Open fstab with Vim**
+##### 10. **Open fstab with Vim**
 
 ```console
 vi /etc/fstab
 ```
 
-11. **Add this line at the bottom**
+##### 11. **Add this line at the bottom**
 
 ```console
 /swapfile none swap sw 0 0
@@ -78,7 +78,7 @@ vi /etc/fstab
 * Press "esc" after finish adding the line to exit edit mode
 * Press "shift+:" then type "wq" to write file and quit editor
 
-12. **Configure Digitalocean DNS**
+##### 12. **Configure Digitalocean DNS**
 Click Add domain on digitalocean then add the domain you have got freely on freenom or bought on namecheap.
 Create 'A' record for your domain:
 
@@ -88,13 +88,13 @@ A | yourdomain.com | (select your droplet)
 
 ## Rails app
 
-1. **Creating the app**
+##### 1. **Creating the app**
 
 ```ruby
 rails new yourrailsapp --database=postgresql
 ```
 
-2. **Navigate to your app directory and generate a controller**
+##### 2. **Navigate to your app directory and generate a controller**
 
 ```ruby
 cd awesomeapp
@@ -109,7 +109,7 @@ rails generate controller Static index
 root 'static#index'
 ```
 
-3. **Automatic Migrations**
+##### 3. **Automatic Migrations**
 This one just runs `rails db:migrate` automatically.
 Create `app.json` in the root directory of your app
 
@@ -129,7 +129,7 @@ Create `app.json` in the root directory of your app
 }
 ```
 
-4. **Add checks**
+##### 4. **Add checks**
 This feature is rather nice, it makes Dokku check to make sure that your freshly uploaded code actually starts up before switching over to it!
 Create a file called `CHECKS` in the root of your project directory
 
@@ -149,7 +149,7 @@ get '/check.txt', to: proc {[200, {}, ['it_works']]}
 
 * And it will make a call to that route when it starts up your new code, thereby ensuring that the new server actually started.
 
-5. **Add your secrets file**
+##### 5. **Add your secrets file**
 
 ```ruby
 # config/secrets.yml
@@ -179,17 +179,17 @@ production:
 dokku config:set yourappname RAILS_MASTER_KEY=thehashstringfromyourmasterkeyfile
 ```
 
-6. **Set up Puma correctly**
+##### 6. **Set up Puma correctly**
 If you are using Rails 6, [take a look at this post](https://www.alanvardy.com/posts/38) to save yourself some headache in getting Puma up and running.
 
-7. **Add remote repository**
+##### 7. **Add remote repository**
 Navigate to your yourrailsapp project directory and add the repository
 
 ```git
 git remote add dokku dokku@your.droplet.ip.address:yourappname
 ```
 
-8. **You can now push your code with**
+##### 8. **You can now push your code with**
 
 ```git
 git add .
@@ -201,13 +201,13 @@ git push dokku master
 
 [Let's Encrypt](https://letsencrypt.org/) provides free SSL certificates. You can find more complete instructions and explanations here.
 
-1. **SSH onto your server**
+##### 1. **SSH onto your server**
 
 ```console
 ssh root@your.droplet.ip.address
 ```
 
-2. **Install Let's Encrypt**
+##### 2. **Install Let's Encrypt**
 
 ```console
 dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
@@ -219,19 +219,19 @@ dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
 dokku plugin:update letsencrypt
 ```
 
-3. **Set your email address** (note that you need to change MYAPP and ME@MYEMAIL.COM)
+##### 3. **Set your email address** (note that you need to change MYAPP and ME@MYEMAIL.COM)
 
 ```console
 dokku config:set --no-restart awesomeapp DOKKU_LETSENCRYPT_EMAIL=ME@MYEMAIL.COM
 ```
 
-4. **Turn it on**
+##### 4. **Turn it on**
 
 ```console
 dokku letsencrypt yourappname
 ```
 
-5. **Set up auto-renewal with a cronjob**
+##### 5. **Set up auto-renewal with a cronjob**
 
 ```console
 dokku letsencrypt:cron-job --add
