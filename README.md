@@ -22,6 +22,9 @@ You can create a droplet (virtual private server) with Dokku pre-installed! When
 4. **Go to your server's IP and follow the web installer**
 Navigate to your droplet's IP address which will be listed in digitalocean. You will need to paste in your public ssh key, then make sure to check "Virtual host naming" for your apps. It means that if you create an app called _myapp_, it will be accessible at _myapp.mydomain.com_
 
+5. **Put your domain on Hostname field**
+This will be important as dokku will generate url based on what you put on Hostname field such as _myapp.**mydomain.com**_ where **mydomain.com** is the hostname. It is possible to change hostnames after installation but I would just recommend to rebuild the app completely if you are changing hostnames.
+
 ## Creating a Dokku app
 
 5. **SSH onto your server**
