@@ -190,6 +190,46 @@ git remote add dokku dokku@your.droplet.ip.address:yourappname
 
 ```git
 git add .
-git commit -m 'rails new'
+git commit -m 'Initialize repo'
 git push dokku master
+```
+
+## Free SSL with Let's Encrypt
+
+[Let's Encrypt](https://letsencrypt.org/) provides free SSL certificates. You can find more complete instructions and explanations here.
+
+1. **SSH onto your server**
+
+```console
+ssh root@your.droplet.ip.address
+```
+
+2. **Install Let's Encrypt**
+
+```console
+dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
+```
+
+* Update if it was already installed
+
+```console
+dokku plugin:update letsencrypt
+```
+
+3. **Set your email address** (note that you need to change MYAPP and ME@MYEMAIL.COM)
+
+```console
+dokku config:set --no-restart awesomeapp DOKKU_LETSENCRYPT_EMAIL=ME@MYEMAIL.COM
+```
+
+4. **Turn it on**
+
+```console
+dokku letsencrypt yourappname
+```
+
+5. **Set up auto-renewal with a cronjob**
+
+```console
+dokku letsencrypt:cron-job --add
 ```
