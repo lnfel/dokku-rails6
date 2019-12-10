@@ -10,7 +10,7 @@ _app versions are indicated at the time of this writing (Dec. 9, 2019)_
 
 ## Creating a Dokku Droplet on Digitalocean
 
-##### **Obtain a domain name**
+##### 1. **Obtain a domain name**
 For testing I used **Freenom** which is you guessed, free domain hosting. Alan uses Namecheap and is proud about it.
 
 2. **Signup for Digitalocean**
