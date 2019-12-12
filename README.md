@@ -48,7 +48,7 @@ dokku apps:create yourappname
 #### 8. **Install Postgres, create and link database**
 
 ```console
-dokku plugin:install https://github.com/dokku/dokku-postgres.git
+dokku plugin:install https://github.com/dokku/dokku-postgres.git postgres
 dokku postgres:create yourdbname
 dokku postgres:link yourdbname yourappname
 ```
