@@ -187,6 +187,8 @@ production:
 dokku config:set yourappname RAILS_MASTER_KEY=thehashstringfromyourmasterkeyfile
 ```
 
+**Note:** In case you are using different PCs, better save the master.key file somewhere you can access for later use. You can include it on your .gitignore but that is a bad practice and will have more risk of being leaked.
+
 #### 6. **Set up Puma correctly**
 If you are using Rails 6, [take a look at this post](https://www.alanvardy.com/posts/38) to save yourself some headache in getting Puma up and running.
 
