@@ -19,11 +19,19 @@ One of the best and cheapest VPS hosting you can find out there.
 #### 3. **Create a Droplet on Digitalocean**
 You can create a droplet (virtual private server) with Dokku pre-installed! When creating a droplet, select the Marketplace and look for Dokku, [add your SSH keys](https://timleland.com/copy-ssh-key-to-clipboard/) and for testing you can select the lowest and cheapest plan.
 
+**Note:**
+If working on Cloud IDE like Cloud9 do your ssh-keygen on your Cloud9 project terminal then copy your id_rsa.pub file contents, this will serve as your IDE's ssh key to access the droplet.
+It is usually located on root/.ssh/id_rsa.pub, you can try using: 
+
+```console
+cat /.ssh/id_rsa.pub
+```
+
 #### 4. **Go to your server's IP and follow the web installer**
 Navigate to your droplet's IP address which will be listed in digitalocean. You will need to paste in your public ssh key, then make sure to check "Virtual host naming" for your apps. It means that if you create an app called _myapp_, it will be accessible at _myapp.mydomain.com_
 
 #### 5. **Put your domain on Hostname field**
-This will be important as dokku will generate url based on what you put on Hostname field such as _myapp.**mydomain.com**_ where **mydomain.com** is the hostname. It is possible to change hostnames after installation but I would just recommend to rebuild the app completely if you are changing hostnames.
+This will be important as dokku will generate url based on what you put on Hostname field such as _myapp.**mydomain.com**_ where **mydomain.com** is the hostname. It is possible to change hostnames after installation but I would just recommend to rebuild the app completely if you are changing hostnames. _TIP:_ you can also use IP address instead of domain. If you decide to use a domain name, Dokku will generate url base on the domain but if you choose to put IP on Hostname field it will only generate using the IP. This is good if you are expecting to change domain name sooner or later.
 
 ## Creating a Dokku app
 
