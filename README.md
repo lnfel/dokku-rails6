@@ -227,10 +227,29 @@ Creating this folder in your project repository isn't quite enough—and in fact
 ```
 
 #### 7. **Add remote repository**
-Navigate to your yourrailsapp project directory and add the repository
+Navigate to your yourrailsapp project directory and add the remote repository, use either of the two below. Using the IP will bind your remote link to the IP address only, helpful in case of changing domains. Using the domain as remote link will bind the repo to the domain only.
 
 ```git
 git remote add dokku dokku@your.droplet.ip.address:yourappname
+```
+
+or
+
+```git
+git remote add dokku dokku@your.domain.address:yourappname
+```
+
+_TIP_:
+list all remote links on your git repo
+
+```git
+git remote
+```
+
+you can use the following git command to remove the remote link in case you are changing the IP or domain address:
+
+```git
+git remote remove dokku
 ```
 
 #### 8. **You can now push your code with**
