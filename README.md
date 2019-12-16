@@ -17,6 +17,8 @@ For testing I used **Freenom** which is you guessed, free domain hosting. Alan u
 One of the best and cheapest VPS hosting you can find out there.
 
 #### 3. **Create a Droplet on Digitalocean**
+First time creating ssh keys? [learn how](https://docs.joyent.com/public-cloud/getting-started/ssh-keys/generating-an-ssh-key-manually/manually-generating-your-ssh-key-in-windows)
+
 You can create a droplet (virtual private server) with Dokku pre-installed! When creating a droplet, select the Marketplace and look for Dokku, [add your SSH keys](https://timleland.com/copy-ssh-key-to-clipboard/) and for testing you can select the lowest and cheapest plan.
 
 **Note:**
