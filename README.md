@@ -192,6 +192,40 @@ dokku config:set yourappname RAILS_MASTER_KEY=thehashstringfromyourmasterkeyfile
 #### 6. **Set up Puma correctly**
 If you are using Rails 6, [take a look at this post](https://www.alanvardy.com/posts/38) to save yourself some headache in getting Puma up and running.
 
+**TL;DR**
+You may have noticed the following lines to your /config/puma.rb file:
+
+```ruby
+# Specifies the `pidfile` that Puma will use.
+pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
+```
+
+Puma's "pidfile", or process ID file, is where Puma stores the unique ID it uses while it's running. A server admin or another process on the system may use this number to check Puma's status or issue the process a kill command if necessary. Unfortunately, if the directory Puma wants to store this file doesn't exist, Puma won't start at all:
+
+```console
+Errno::ENOENT: No such file or directory @ rb_sysopen - tmp/pids/server.pid
+```
+
+change the previous puma.rb code to this:
+
+```ruby
+# Specifies the `pidfile` that Puma will use.
+pidfile ENV.fetch("PIDFILE") { "server.pid" }
+```
+
+Creating this folder in your project repository isn't quite enough—and in fact, in your local repository, it's probably already there. The /tmp/ folder is added to /.gitignore by default, and for good reason: /tmp/ can be a dumping ground for temporary files and caches, and you usually don't want to commit these files. In order to ignore the files that should be ignored and still commit the above pidfile directory to your remote repository, you’ll need to add the following lines to your .gitignore file:
+
+```ruby
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+/tmp/pids/*              # this line
+!/log/.keep
+!/tmp/.keep
+!/tmp/pids               # this line
+!/tmp/pids/.keep         # and this line
+```
+
 #### 7. **Add remote repository**
 Navigate to your yourrailsapp project directory and add the repository
 
